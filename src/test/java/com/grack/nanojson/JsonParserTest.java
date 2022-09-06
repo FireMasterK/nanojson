@@ -98,7 +98,7 @@ class JsonParserTest {
 	@Test
 	void objectOneElement() throws JsonParserException {
 		assertEquals(JsonObject.class, JsonParser.object().from("{\"a\":1}").getClass());
-		assertEquals("{a=1}", JsonParser.object().from("{\"a\":1}").toString());
+		assertEquals("{a=>1}", JsonParser.object().from("{\"a\":1}").toString());
 	}
 
 	@Test
@@ -142,7 +142,7 @@ class JsonParserTest {
 	@Test
 	void arrayWithEverything() throws JsonParserException {
 		JsonArray a = JsonParser.array().from("[1, -1.0e6, \"abc\", [1,2,3], {\"abc\":123}, true, false]");
-		assertEquals("[1, -1000000.0, abc, [1, 2, 3], {abc=123}, true, false]", a.toString());
+		assertEquals("[1, -1000000.0, abc, [1, 2, 3], {abc=>123}, true, false]", a.toString());
 		assertEquals(1.0, a.getDouble(0), 0.001f);
 		assertEquals(1, a.getInt(0));
 		assertEquals(-1000000, a.getInt(1));

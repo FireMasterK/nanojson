@@ -15,13 +15,14 @@
  */
 package com.grack.nanojson;
 
-import java.util.LinkedHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+
 import java.util.Map;
 
 /**
- * Extends a {@link LinkedHashMap} with helper methods to determine the underlying JSON type of the map element.
+ * Extends a {@link Object2ObjectLinkedOpenHashMap} with helper methods to determine the underlying JSON type of the map element.
  */
-public class JsonObject extends LinkedHashMap<String, Object> {
+public class JsonObject extends Object2ObjectLinkedOpenHashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 
 	/**
