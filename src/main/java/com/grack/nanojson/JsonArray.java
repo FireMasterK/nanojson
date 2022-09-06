@@ -15,14 +15,15 @@
  */
 package com.grack.nanojson;
 
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Extends an {@link ArrayList} with helper methods to determine the underlying JSON type of the list element.
+ * Extends an {@link ObjectArrayList} with helper methods to determine the underlying JSON type of the list element.
  */
-public class JsonArray extends ArrayList<Object> {
+public class JsonArray extends ObjectArrayList<Object> {
 	private static final long serialVersionUID = 1L;
 
 	/**
