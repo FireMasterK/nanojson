@@ -207,6 +207,8 @@ public class JsonObject extends Object2ObjectLinkedOpenHashMap<String, Object> {
 	 */
 	public String getString(String key, String default_) {
 		Object o = get(key);
+		if (o instanceof LazyString)
+			return o.toString();
 		if (o instanceof String)
 			return (String) o;
 		return default_;
@@ -244,6 +246,7 @@ public class JsonObject extends Object2ObjectLinkedOpenHashMap<String, Object> {
 	 * Returns true if the object has a string element at that key.
 	 */
 	public boolean isString(String key) {
-		return get(key) instanceof String;
+		Object o = get(key);
+		return o instanceof LazyString || o instanceof String;
 	}
 }
