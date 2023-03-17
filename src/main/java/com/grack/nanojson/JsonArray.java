@@ -215,6 +215,8 @@ public class JsonArray extends ObjectArrayList<Object> {
 	 */
 	public String getString(int key, String default_) {
 		Object o = get(key);
+		if (o instanceof LazyString)
+			return o.toString();
 		if (o instanceof String)
 			return (String) o;
 		return default_;
@@ -252,6 +254,7 @@ public class JsonArray extends ObjectArrayList<Object> {
 	 * Returns true if the array has a string element at that index.
 	 */
 	public boolean isString(int key) {
-		return get(key) instanceof String;
+		Object o = get(key);
+		return o instanceof LazyString || o instanceof String;
 	}
 }
