@@ -19,6 +19,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 /**
  * Extends an {@link ObjectArrayList} with helper methods to determine the underlying JSON type of the list element.
@@ -256,5 +257,21 @@ public class JsonArray extends ObjectArrayList<Object> {
 	public boolean isString(int key) {
 		Object o = get(key);
 		return o instanceof LazyString || o instanceof String;
+	}
+
+	/**
+	 * Shortcut method to create a stream with only objects of these classes.
+	 */
+	public <T> Stream<T> streamAs(Class<T> clazz) {
+		return stream()
+			.filter(clazz::isInstance)
+			.map(clazz::cast);
+	}
+
+	/**
+	 *  Shortcut method to create a stream that only contains {@link JsonObject JsonObjects}.
+	 */
+	public Stream<JsonObject> streamAsJsonObjects() {
+		return streamAs(JsonObject.class);
 	}
 }
