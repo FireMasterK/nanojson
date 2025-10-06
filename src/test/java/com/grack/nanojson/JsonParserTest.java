@@ -640,6 +640,18 @@ class JsonParserTest {
 	}
 
 	@Test
+	void failBadKeywords8() {
+		try {
+			JsonParser.object().from("{ \"appel\": flap }");
+			fail("Should have failed to parse");
+		} catch (JsonParserException e) {
+			// Should report the full token 'flap' (not 'fap') in the error message
+			testException(e, 1, 12);
+			assertTrue(e.getMessage().contains("flap"), "Error message did not contain 'flap': " + e.getMessage());
+		}
+	}
+
+	@Test
 	void failTrailingCommaMultiline() {
 		String testString = "{\n\"abc\":123,\n\"def\":456,\n}";
 		try {

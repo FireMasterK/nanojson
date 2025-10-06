@@ -176,8 +176,13 @@ final class JsonTokener implements Closeable {
 		}
 
 		for (int i = 0; i < expected.length; i++)
-			if (buffer[index++] != expected[i])
+			if (buffer[index++] != expected[i]) {
+				// We advanced past the mismatched character; step back so the
+				// createHelpfulException can include the actual token character
+				// in its helpful message (otherwise the mismatched char is lost).
+				index--;
 				throw createHelpfulException(first, expected, i);
+			}
 
 		fixupAfterRawBufferRead();
 
